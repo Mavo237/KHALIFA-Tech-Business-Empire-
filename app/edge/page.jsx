@@ -1,25 +1,22 @@
-import { Markdown } from 'components/markdown';
-
 export const metadata = {
-    title: 'Fallback'
+  title: 'Fallback'
 };
 
 const explainer = `
-This page is using a [Netlify Edge Function](https://docs.netlify.com/edge-functions/overview/) to rewrite the URL based on visitor geography.
+This page is using a Netlify Edge Function to rewrite the request based on the location of the visitor.
 
-For it to be invoked, please either run this site locally with \`netlify dev\` or deploy it to Netlify.
+For it to be invoked, please either run the project locally or deploy it.
 
-Edge Functions are framework-agnostic, but are also used behind the scenes to run Next.js Middleware on Netlify.
-There are advatanges to using Edge Functions directly, such as the ability to access & transform the response body.
+Edge Functions are framework-agnostic, but there are advantages to using Edge Functions with Next.js.
 
-[See more examples](https://edge-functions-examples.netlify.app)
+See more examples at edge-functions-examples.netlify.app
 `;
 
 export default function FallbackPage() {
-    return (
-        <>
-            <h1 className="mb-8">You&apos;ve reached the fallback page.</h1>
-            <Markdown content={explainer} />
-        </>
-    );
+  return (
+    <>
+      <h1 className="mb-8">You&apos;re in a fallback location</h1>
+      <p style={{ whiteSpace: 'pre-wrap' }}>{explainer}</p>
+    </>
+  );
 }
