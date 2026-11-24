@@ -1,36 +1,35 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 
-const getResourceSize = (el) => ({ width: el?.naturalWidth || 0, height: el?.naturalHeight || 0 })
-export function ImageWithSizeOverlay({ src, srcSet, sizes, overlayPosition }) {
-    const imageRef = useRef();
-    const [imgSize, setImgSize] = useState(undefined);
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-    const handleImageLoad = useCallback(() => {
-        const imgElement = imageRef.current;
-        if (imgElement?.complete) {
-            const size = getResourceSize(imgElement?.currentSrc);
-            setImgSize(size);
-        } else {
-            setImgSize(undefined);
-        }
-    }, []);
+const getResourceSize = (el) => ({ width: el.clientWidth, height: el.clientHeight });
 
-    useEffect(() => {
-        handleImageLoad();
-    }, [handleImageLoad]);
+export function ImageWithSizeOverlay({ src, srcSet, overlayPosition = 'top' }) {
+  const imageRef = useRef();
+  const [imgSize, setImgSize] = useState();
 
-    return (
-        <div className="relative">
-            {imgSize && (
-                <span
-                    className={`absolute py-1.5 px-2.5 text-sm rounded bg-neutral-900/70 top-2.5 ${
-                        overlayPosition === 'right' ? 'right-2.5' : 'left-2.5'
-                    }`}
-                >{`Size: ${Math.ceil(imgSize / 1024)}KB`}</span>
-            )}
+  const handleImageLoad = useCallback(() => {
+    const imgElement = imageRef.current;
+    if (imgElement?.complete) {
+      const size = getResourceSize(imgElement);
+      setImgSize(size);
+    } else {
+      setImgSize(undefined);
+    }
+  }, []);
 
-            <img src={src} srcSet={srcSet} sizes={sizes} alt="Corgi" onLoad={handleImageLoad} ref={imageRef} />
-        </div>
-    );
+  useEffect(() => {
+    handleImageLoad();
+  }, [handleImageLoad]);
+
+  return (
+    <div className="relative">
+      {imgSize && (
+        <span className={'absolute px-2 py-1 bg-black text-white text-xs ' + (overlayPosition === 'bottom' ? 'bottom-2 left-2' : 'top-2 left-2')}>
+          {`Size: ${Math.ceil(imgSize.width)} x ${Math.ceil(imgSize.height)}`}
+        </span>
+      )}
+      <img ref={imageRef} src={src} srcSet={srcSet} onLoad={handleImageLoad} alt="" className="w-full" />
+    </div>
+  );
 }
