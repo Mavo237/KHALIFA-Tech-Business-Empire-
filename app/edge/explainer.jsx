@@ -1,24 +1,9 @@
-import { Markdown } from 'components/markdown';
-
 const explainer = `
-This page is using a Netlify Edge Function (\`netlify/edge-functions/rewrite.js\`) to rewrite the URL based on visitor geography.
+This page is using a Netlify Edge Function to rewrite the request based on the location of the visitor.
 
-~~~js
-const rewrite = async (request, context) => {
-    const path = context.geo?.country?.code === 'AU' ? '/edge/australia' : '/edge/not-australia';
-    return new URL(path, request.url);
-};
-
-export const config = {
-    path: '/edge'
-};
-
-export default rewrite;
-~~~
-
-[See more examples](https://edge-functions-examples.netlify.app)
+See more examples at edge-functions-examples.netlify.app
 `;
 
 export default function EdgeFunctionExplainer() {
-    return <Markdown content={explainer} />;
+  return <p style={{ whiteSpace: 'pre-wrap' }}>{explainer}</p>;
 }
