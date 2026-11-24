@@ -1,0 +1,10 @@
+{
+  "name": "KHALIFA Tech Business Empire",
+  "short_name": "KHALIFA Empire",
+  "description": "Premium Websites, Webapps, MoMo Integration & SEO in Cameroon",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00A651",
+  "icons": [{ "src": "/icon.png", "sizes": "512x512", "type": "image/png" }]
+}
