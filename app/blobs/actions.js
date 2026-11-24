@@ -1,27 +1,13 @@
-'use server';
-import { getStore } from '@netlify/blobs';
-const uploadDisabled = false;
-
-function store() {
-    return getStore({ name: 'shapes', consistency: 'strong' });
-}
-
-// Always be sanitizing data in real sites!
-export async function uploadShapeAction({ parameters }) {
-    if (uploadDisabled) throw new Error('Sorry, uploads are disabled');
-
-    const key = parameters.name;
-    await store().setJSON(key, parameters);
-    console.log('Stored shape with parameters:', parameters, 'to key:', key);
+// Stub for GitHub Pages - Blobs disabled, static export only
+export async function uploadShapeAction() {
+  console.warn('Blobs disabled on GitHub Pages');
+  return null;
 }
 
 export async function listShapesAction() {
-    const data = await store().list();
-    const keys = data.blobs.map(({ key }) => key);
-    return keys;
+  return [];
 }
 
-export async function getShapeAction({ keyName }) {
-    const data = await store().get(keyName, { type: 'json' });
-    return data;
+export async function getShapeAction() {
+  return null;
 }
