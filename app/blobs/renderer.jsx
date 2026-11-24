@@ -1,6 +1,5 @@
-import { fixedSize } from './generator';
-import { randomInt } from './utils'
-
+import { fixedSize } from './generator';const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 // See: https://github.com/lokesh-coder/blobs.app/blob/master/src/components/Blob.js
 export function ShapeRenderer(props) {
     const { svgPath, colors } = props;
